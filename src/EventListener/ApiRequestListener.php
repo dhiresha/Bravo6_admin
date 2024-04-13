@@ -24,7 +24,7 @@ class ApiRequestListener
     {
         $request = $event->getRequest();
         // Only check API key for paths starting with /api and /auth
-        if (strpos($request->getPathInfo(), '/api') === 0 || $request->getPathInfo() === '/auth') {
+        if (strpos($request->getPathInfo(), '/api/') === 0 || $request->getPathInfo() === '/auth') {
             if (!$request->headers->has('X-APP-KEY') || $request->headers->get('X-APP-KEY') !== $this->appKey) {
 				$response = new JsonResponse(
 					[
