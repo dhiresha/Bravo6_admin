@@ -1,0 +1,25 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+      type: attribute
+
+    mappings:
+      media_files:
+        uri_prefix: /uno_media/uno_drive
+        upload_destination: '%kernel.project_dir%/uno_uploads/uno_media'
+        namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+        inject_on_load: true
+        delete_on_update: true
+        delete_on_remove: true
+
+      profile_pics:
+        uri_prefix: /images/profile_pic
+        upload_destination: '%kernel.project_dir%/uno_uploads/user_data/images'
+        namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+        inject_on_load: true
+        delete_on_update: true
+        delete_on_remove: true
+          

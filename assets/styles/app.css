@@ -1,0 +1,97 @@
+
+/* body {
+    background-color: lightgray;
+} */
+
+/* -- EASY ADMIN CSS OVERRIDES -- */
+body{
+	/* -- when navbar-compact */
+	&.ea-sidebar-width-compact {
+		.sidebar{
+			.main-header{
+				.navbar {
+					padding-left: 0 !important;
+				}
+			}
+		}
+	}
+
+	.wrapper {
+		transition: all 250ms ease-in-out;
+	}
+}
+
+.admin-main-image-logo {
+	opacity: 0;
+	animation: fadeIn 250ms;
+	animation-timing-function:linear;
+	animation-delay:250ms;
+	animation-fill-mode:forwards;
+	animation-iteration-count: 1;
+	width: clamp(20px, 5vw, 5rem);
+}
+
+/* -- USED FOR PASSWORD TYPE WITH HIDE/SHOW BUTTON -- */
+.rmt-password-type {
+	.form-widget {
+		display: flex;
+
+		.rmt-password-type-input{
+			width: 100%;
+			padding-block: 0 !important;
+			border-top-right-radius: 0 !important;
+			border-bottom-right-radius: 0 !important;
+		}
+
+		.rmt-toggle-password-btn{
+			width: 6%;
+			padding-inline: 1% !important;
+			border-top-left-radius: 0 !important;
+			border-bottom-left-radius: 0 !important;
+		}
+	}
+}
+
+
+/* -- CUSTOMISING PROFILE PIC -- */
+.user-avatar{
+	object-fit: cover;
+	height: 2.5rem !important;
+	max-width: unset !important;
+	width: unset !important;
+	aspect-ratio: 1 !important;
+	border-radius: 50% !important;
+}
+
+/* -- CUSTOMISING HEADER -- */
+.content-top{
+	min-height: 4vw;
+  	max-height: fit-content;
+}
+
+
+/* --------- ANIMATIONS ------------------ */
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        visibility: visible;
+    }
+    to { 
+        opacity: 1; 
+        visibility: visible;
+    }
+}
+
+/* Wavy Animation */
+@keyframes wavyAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

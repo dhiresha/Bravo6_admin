@@ -1,0 +1,39 @@
+{# DON'T DO THIS: it will cause an infinite loop #}
+{# {% extends '@EasyAdmin/layout.html.twig' %} #}
+
+{# DO THIS: the '!' symbol tells Symfony to extend from the original template #}
+{% extends '@!EasyAdmin/layout.html.twig' %}
+{% block header_logo %}
+	<a class="logo" title="{{ ea.dashboardTitle|striptags }}" href="{{ path(ea.dashboardRouteName) }}">
+		<span class="logo-custom">
+			{% if ea.dashboardTitle is defined and ea.dashboardTitle is not empty %}
+				{{ ea.dashboardTitle|raw }}
+			{% else %}
+				<div class="w-100 d-flex justify-content-center">
+					<img class="admin-main-image-logo rounded-3 shadow" src="/images/logos_main.png" alt="U.N.O">
+				</div>
+			{% endif %}
+		</span>
+		<span class="logo-compact">
+			<div class="w-100 d-flex justify-content-center">
+				<img class="admin-main-image-logo is-compact rounded-circle shadow-sm w-75" src="/images/logos_favicon.png" alt="U.N.O">
+			</div>
+		</span>
+	</a>
+{% endblock header_logo %}
+
+{% block header_custom_menu %}
+	<div class="dropdown user-menu-wrapper {{ is_granted(impersonator_permission) ? 'user-is-impersonated' }}">
+		<a class="user-details" type="button" data-bs-toggle="dropdown" data-bs-offset="0,5" aria-expanded="false">
+			{{ user_menu_avatar }}
+			{% if ea.userMenu.isNameDisplayed %}
+				<span class="user-name text-capitalize">
+					<span>Hello,</span>
+					<span class="fst-italic fw-bold">{{ ea.userMenu.name }}</span>
+				</span>
+			{% endif %}
+		</a>
+
+		{{ user_menu_dropdown }}
+	</div>
+{% endblock header_custom_menu %}

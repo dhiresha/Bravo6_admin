@@ -1,0 +1,5 @@
+dubture_f_fmpeg:
+  ffmpeg_binary: '%env(FFMPEG_BINARY_PATH)%'
+  ffprobe_binary: '%env(FFPROBE_BINARY_PATH)%'
+  binary_timeout: 60 # Use 0 for infinite
+  threads_count: '%env(FFMPEG_THREADS_COUNT)%'

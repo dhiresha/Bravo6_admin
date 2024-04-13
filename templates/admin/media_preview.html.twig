@@ -1,0 +1,29 @@
+{% block field %}
+	{% set originalUrl = media_url(entity.instance) %}
+	{% set pageName = field.customOptions.get('pageName') %}
+	{% set thumbnailUrl = getMediaThumbnail(entity.instance, pageName) %}
+	<a href="{{ originalUrl }}" class="dh_media_preview_container page_{{ pageName }}" target="_blank" title="Click to view image">
+		<div 
+			class="dh_media_preview_wrapper rounded-4 is-loading"
+			{{ stimulus_controller('dh-media-preview') }}
+		>
+			<img src="{{ thumbnailUrl }}" 
+				{{ stimulus_target('dh-media-preview', 'mediaPreviewImg') }}
+				{{ stimulus_action('dh-media-preview', 'onImageLoad', 'load')|stimulus_action('dh-media-preview', 'onImageError', 'error') }}
+				loading="lazy" 
+				class="dh_media_preview dh_media_preview_img" 
+			/>
+			<div
+				class="dh_media_preview_error_message_wrapper hide-error-msg"
+				{{ stimulus_target('dh-media-preview', 'errorMediaPreview') }}
+			>
+				{{ bootstrap_icon('image-fill', {
+					class: 'dh_media_preview_error_img_icon'
+				}) }}
+				<div class="dh_media_preview_error_message">
+					Error on loading preview.
+				</div>
+			</div>
+		</div>
+	</a>
+{% endblock %}

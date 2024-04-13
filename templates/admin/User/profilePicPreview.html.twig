@@ -1,0 +1,12 @@
+{% block field %}
+	{% set thumbnailUrl = null %}
+	{% set pageName = field.customOptions.get('pageName') %}
+	{% if field.value %}
+		{% if pageName == "index" %}
+			{% set thumbnailUrl = asset(field.value | imagine_filter('user_thumbnail')) %}
+		{% else %}
+			{% set thumbnailUrl = asset(field.value | imagine_filter('user_original')) %}
+		{% endif %}
+		<img src="{{ thumbnailUrl }}" alt="Image Preview" />
+	{% endif %}
+{% endblock %}
