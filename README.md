@@ -1,14 +1,11 @@
-
-# U.N.O - Unwanted, Needless and Overrated
-
 ## Installation Guide
 1. Clone this project using the github link using `git clone`
-2. Go into the project folder, using `cd uno_project`
+2. Go into the project folder, using `cd bravo6_project`
 3. Run `composer install`
 4. Run `npm install`
 
 ## Creating Project Database and User using MySQL/Doctrine ORM
-1. Create MySQL user `lekipuno`
+1. Create MySQL user `bravo6`
 2. Update `env.local` to match user and DB changes
 3. Create Database using `php bin/console doctrine:database:create`
 4. Do migration using `php bin/console doctrine:migrations:migrate` to update database
@@ -430,10 +427,10 @@ sudo find /var/www -type d -exec chmod g+s {} \;
 
 ```bash
 sudo chown -R your_username:www-data /var/www/project_uno_admin
-sudo find /var/www/project_uno_admin -type d -exec chmod 775 {} \;
-sudo find /var/www/project_uno_admin -type f -exec chmod 664 {} \;
-sudo chmod -R g+w /var/www/project_uno_admin/var
-sudo chmod -R g+w /var/www/project_uno_admin/public/bundles
+sudo find /var/www/bravo6_admin -type d -exec chmod 775 {} \;
+sudo find /var/www/bravo6_admin -type f -exec chmod 664 {} \;
+sudo chmod -R g+w /var/www/bravo6_admin/var
+sudo chmod -R g+w /var/www/bravo6_admin/public/bundles
 ```
 - If using git for that specific repo, when pulling, you might want to check the permissions on each `git pull` to make sure
 that permissions are set correctly, optionally you could create a bash script with the following, that can be called on each
@@ -442,10 +439,10 @@ that permissions are set correctly, optionally you could create a bash script wi
 ```bash
 #!/bin/bash
 sudo chown -R your_username:www-data /var/www/project_uno_admin
-sudo find /var/www/project_uno_admin -type d -exec chmod 775 {} \;
-sudo find /var/www/project_uno_admin -type f -exec chmod 664 {} \;
-sudo chmod -R g+w /var/www/project_uno_admin/var
-sudo chmod -R g+w /var/www/project_uno_admin/public/bundles
+sudo find /var/www/bravo6_admin -type d -exec chmod 775 {} \;
+sudo find /var/www/bravo6_admin -type f -exec chmod 664 {} \;
+sudo chmod -R g+w /var/www/bravo6_admin/var
+sudo chmod -R g+w /var/www/bravo6_admin/public/bundles
 ```
 *Run this script whenever needed to ensure permissions are correct.*
 
@@ -546,9 +543,3 @@ The server is now available on https://localhost (TLS is automatically enabled, 
 - __Install__: [Click Here](https://mercure.rocks/docs/hub/install)
 - __Config__: [Click Here](https://mercure.rocks/docs/hub/config)
 - __Using NGINX As Proxy__: [Click Here](https://mercure.rocks/docs/hub/config)
-
----
-
-### Credentials for Backend Login
-- Email: admin@lekipuno.mu
-- Password: lekipuno
