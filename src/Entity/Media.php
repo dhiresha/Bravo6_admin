@@ -24,49 +24,53 @@ class Media
     private ?int $id = null;
 
 	#[Groups(["folder:read:collection"])]
-	#[ORM\Column(length: 255)]
-	private ?string $name = null;
+               	#[ORM\Column(length: 255)]
+               	private ?string $name = null;
 
 	#[Groups(["folder:read:collection"])]
-	#[ORM\Column(length: 255)]
-	private ?string $fileType = null;
+               	#[ORM\Column(length: 255)]
+               	private ?string $fileType = null;
 
 	#[Ignore]
-	#[Vich\UploadableField(mapping: 'media_files', fileNameProperty: 'fileName', size: 'fileSize')]
-	private ?File $file = null;
+               	#[Vich\UploadableField(mapping: 'media_files', fileNameProperty: 'fileName', size: 'fileSize')]
+               	private ?File $file = null;
 
 	#[ORM\Column(nullable: true)]
-	private ?string $fileName = null;
+               	private ?string $fileName = null;
 
 	#[Groups(["folder:read:collection"])]
-	#[ORM\Column(nullable: true)]
-	private ?int $fileSize = null;
+               	#[ORM\Column(nullable: true)]
+               	private ?int $fileSize = null;
 
 	#[Groups(["folder:read:collection"])]
-	#[ORM\Column(nullable: true)]
-	private ?\DateTimeImmutable $updatedAt = null;
+               	#[ORM\Column(nullable: true)]
+               	private ?\DateTimeImmutable $updatedAt = null;
 
 	#[Groups(["folder:read:collection"])]
-	#[MaxDepth(1)]
-	#[ORM\ManyToMany(targetEntity: Folder::class, mappedBy: 'medias')]
-	private Collection $folders;
+               	#[MaxDepth(1)]
+               	#[ORM\ManyToMany(targetEntity: Folder::class, mappedBy: 'medias')]
+               	private Collection $folders;
 
 	#[Ignore]
-	#[Groups(["folder:read:collection"])]
-	#[MaxDepth(1)]
-	#[ORM\ManyToOne(inversedBy: 'media')]
-	private ?User $owner = null;
+               	#[Groups(["folder:read:collection"])]
+               	#[MaxDepth(1)]
+               	#[ORM\ManyToOne(inversedBy: 'media')]
+               	private ?User $owner = null;
 
 	#[Groups(["folder:read:collection"])]
-	#[ORM\Column]
-	private ?bool $starred = false;
+               	#[ORM\Column]
+               	private ?bool $starred = false;
 
     #[ORM\Column(nullable: true)]
     private ?array $additionalData = null;
 
+    #[ORM\OneToMany(mappedBy: 'productImage', targetEntity: Product::class)]
+    private Collection $products;
+
     public function __construct()
     {
         $this->folders = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,9 +103,9 @@ class Media
     }
 
 	public function getFile(): ?File
-	{
-		return $this->file;
-	}
+               	{
+               		return $this->file;
+               	}
 
 	/**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -125,49 +129,49 @@ class Media
     }
 
 	public function getFileName(): ?string
-	{
-		return $this->fileName;
-	}
+               	{
+               		return $this->fileName;
+               	}
 
 	public function setFileName(?string $fileName): void
-	{
-		$this->fileName = $fileName;
-	}
+               	{
+               		$this->fileName = $fileName;
+               	}
 
 	public function getFileSize(): ?int
-	{
-		return $this->fileSize;
-	}
+               	{
+               		return $this->fileSize;
+               	}
 
 	public function setFileSize(?int $fileSize): void
-	{
-		$this->fileSize = $fileSize;
-	}
+               	{
+               		$this->fileSize = $fileSize;
+               	}
 
 	#[Groups(["folder:read:collection"])]
-	public function getFormattedFileSize(): string
-	{
-		$bytes = $this->getFileSize();
-		if ($bytes == 0) {
-			return '0 Bytes';
-		}
-	
-		$k = 1024;
-		$sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-		$i = floor(log($bytes) / log($k));
-	
-		return sprintf("%.2f %s", $bytes / pow($k, $i), $sizes[$i]);
-	}
+               	public function getFormattedFileSize(): string
+               	{
+               		$bytes = $this->getFileSize();
+               		if ($bytes == 0) {
+               			return '0 Bytes';
+               		}
+               	
+               		$k = 1024;
+               		$sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+               		$i = floor(log($bytes) / log($k));
+               	
+               		return sprintf("%.2f %s", $bytes / pow($k, $i), $sizes[$i]);
+               	}
 
 	public function getUpdatedAt(): ?\DateTimeImmutable
-	{
-		return $this->updatedAt;
-	}
+               	{
+               		return $this->updatedAt;
+               	}
 
 	public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
-	{
-		$this->updatedAt = $updatedAt;
-	}
+               	{
+               		$this->updatedAt = $updatedAt;
+               	}
 
     /**
      * @return Collection<int, Folder>
@@ -197,9 +201,9 @@ class Media
     }
 
 	public function __toString()
-	{
-		return $this->name;
-	}
+               	{
+               		return $this->name;
+               	}
 
     public function getOwner(): ?User
     {
@@ -233,6 +237,36 @@ class Media
     public function setAdditionalData(?array $additionalData): static
     {
         $this->additionalData = $additionalData;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): static
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setProductImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): static
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getProductImage() === $this) {
+                $product->setProductImage(null);
+            }
+        }
 
         return $this;
     }
