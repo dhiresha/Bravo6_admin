@@ -2,11 +2,13 @@
 
 namespace App\Controller\Admin;
 
-
+use App\Entity\Cart;
+use App\Entity\CartItem;
 use App\Entity\Media;
 use App\Entity\Folder;
 use App\Entity\Role;
 use App\Entity\User;
+use App\Entity\Product;
 use App\Service\ImageService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -92,6 +94,9 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         yield MenuItem::linkToCrud('Media', 'fa-solid fa-photo-film', Media::class);
         yield MenuItem::linkToCrud('Folder','fa-solid fa-folder', Folder::class);
+		yield MenuItem::linkToCrud('Product','fa-solid fa-box', Product::class);
+		yield MenuItem::linkToCrud('Cart','fa-solid fa-cart-shopping', Cart::class);
+		yield MenuItem::linkToCrud('CartItem','fa-solid fa-cart-plus', CartItem::class);
     }
 
 	public function configureUserMenu(UserInterface $user): UserMenu

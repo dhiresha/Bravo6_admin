@@ -24,18 +24,18 @@ class ApiRequestListener
     {
         $request = $event->getRequest();
         // Only check API key for paths starting with /api and /auth
-        if (strpos($request->getPathInfo(), '/api') === 0 || $request->getPathInfo() === '/auth') {
-            if (!$request->headers->has('X-APP-KEY') || $request->headers->get('X-APP-KEY') !== $this->appKey) {
-				$response = new JsonResponse(
-					[
-						'status' => 401,
-						'message' => 'Invalid APP Key'
-					], 
-					JsonResponse::HTTP_UNAUTHORIZED
-				);
-                $event->setResponse($response); // Set the response and stop further event propagation
-                $event->stopPropagation();
-            }
-        }
+        // if (strpos($request->getPathInfo(), '/api') === 0 || $request->getPathInfo() === '/auth') {
+        //     if (!$request->headers->has('X-APP-KEY') || $request->headers->get('X-APP-KEY') !== $this->appKey) {
+		// 		$response = new JsonResponse(
+		// 			[
+		// 				'status' => 401,
+		// 				'message' => 'Invalid APP Key'
+		// 			], 
+		// 			JsonResponse::HTTP_UNAUTHORIZED
+		// 		);
+        //         $event->setResponse($response); // Set the response and stop further event propagation
+        //         $event->stopPropagation();
+        //     }
+        // }
     }
 }
