@@ -13,6 +13,7 @@ class ApiRequestListener
 
     public function __construct(string $appKeyPath)
     {
+	return;
 		if (file_exists($appKeyPath)) {
             $this->appKey = file_get_contents($appKeyPath);
         } else {
@@ -22,6 +23,7 @@ class ApiRequestListener
 
     public function onKernelRequest(RequestEvent $event)
     {
+	return;
         $request = $event->getRequest();
         // Only check API key for paths starting with /api and /auth
         // if (strpos($request->getPathInfo(), '/api') === 0 || $request->getPathInfo() === '/auth') {
