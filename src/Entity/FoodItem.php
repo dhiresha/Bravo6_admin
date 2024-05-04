@@ -32,6 +32,9 @@ class FoodItem
     #[MaxDepth(1)]
     private Collection $dishes;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Media $media = null;
+
     public function __construct()
     {
         $this->dishes = new ArrayCollection();
@@ -109,5 +112,17 @@ class FoodItem
 	{
 		return $this->name;
 	}
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
+
+        return $this;
+    }
 
 }

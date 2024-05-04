@@ -2,34 +2,36 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\FoodItem;
+use App\Entity\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class FoodItemCrudController extends AbstractCrudController
+class OrderCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return FoodItem::class;
+        return Order::class;
     }
 
+    
     public function configureFields(string $pageName): iterable
     {
         return [
             yield IdField::new('id')->hideOnForm(),
-            yield TextField::new('name'),
-            yield AssociationField::new('foodCategory'),
-            yield NumberField::new('price'),
-			yield AssociationField::new('media')->autocomplete(),
+            yield TextField::new('customerName'),
+            yield TextField::new('customerEmail'),
+            yield TextField::new('phoneNumber'),
+            yield TextField::new('status'),
+            yield AssociationField::new('dish')->autocomplete(),
         ];
     }
+    
 
     public function configureActions(Actions $actions): Actions
 	{
