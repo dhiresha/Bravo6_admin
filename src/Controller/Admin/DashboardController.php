@@ -4,8 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\Cart;
 use App\Entity\CartItem;
+use App\Entity\Dish;
 use App\Entity\Media;
 use App\Entity\Folder;
+use App\Entity\FoodCategory;
+use App\Entity\FoodItem;
 use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Product;
@@ -51,7 +54,7 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-        $text = "Welcome to U.N.O!";
+        $text = "Welcome";
         return $this->render('admin/adminDashboard.html.twig', [
             'text' => $text
         ]);
@@ -94,9 +97,13 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         yield MenuItem::linkToCrud('Media', 'fa-solid fa-photo-film', Media::class);
         yield MenuItem::linkToCrud('Folder','fa-solid fa-folder', Folder::class);
-		yield MenuItem::linkToCrud('Product','fa-solid fa-box', Product::class);
-		yield MenuItem::linkToCrud('Cart','fa-solid fa-cart-shopping', Cart::class);
-		yield MenuItem::linkToCrud('CartItem','fa-solid fa-cart-plus', CartItem::class);
+		yield MenuItem::linkToCrud('FoodItem','fa-solid fa-bowl-food', FoodItem::class);
+		yield MenuItem::linkToCrud('FoodCategory','fa-solid fa-can-food', FoodCategory::class);
+		yield MenuItem::linkToCrud('Dish','fa-solid fa-plate-wheat', Dish::class);
+		//yield MenuItem::linkToCrud('Product','fa-solid fa-box', Product::class);
+		//yield MenuItem::linkToCrud('Cart','fa-solid fa-cart-shopping', Cart::class);
+		//yield MenuItem::linkToCrud('CartItem','fa-solid fa-cart-plus', CartItem::class);
+		
     }
 
 	public function configureUserMenu(UserInterface $user): UserMenu
