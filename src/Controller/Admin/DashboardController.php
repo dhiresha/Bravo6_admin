@@ -9,6 +9,7 @@ use App\Entity\Media;
 use App\Entity\Folder;
 use App\Entity\FoodCategory;
 use App\Entity\FoodItem;
+use App\Entity\Order;
 use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Product;
@@ -100,6 +101,7 @@ class DashboardController extends AbstractDashboardController
 		yield MenuItem::linkToCrud('FoodItem','fa-solid fa-bowl-food', FoodItem::class);
 		yield MenuItem::linkToCrud('FoodCategory','fa-solid fa-can-food', FoodCategory::class);
 		yield MenuItem::linkToCrud('Dish','fa-solid fa-plate-wheat', Dish::class);
+		yield MenuItem::linkToCrud('Order','fa-solid fa-plate-file', Order::class);
 		//yield MenuItem::linkToCrud('Product','fa-solid fa-box', Product::class);
 		//yield MenuItem::linkToCrud('Cart','fa-solid fa-cart-shopping', Cart::class);
 		//yield MenuItem::linkToCrud('CartItem','fa-solid fa-cart-plus', CartItem::class);

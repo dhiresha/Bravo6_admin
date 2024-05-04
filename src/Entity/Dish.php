@@ -26,9 +26,13 @@ class Dish
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private ?string $totalPrice = null;
 
+    #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'dish')]
+    private Collection $orders;
+
     public function __construct()
     {
         $this->dishItems = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,5 +74,32 @@ class Dish
     public function getTotalPrice(): ?string
     {
         return $this->totalPrice;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->addDish($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeDish($this);
+        }
+
+        return $this;
     }
 }
